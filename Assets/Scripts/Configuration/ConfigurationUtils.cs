@@ -15,13 +15,17 @@ public static class ConfigurationUtils
     /// <value>paddle move units per second</value>
     public static float PaddleMoveUnitsPerSecond
     {
-        get { return 10; }
+        get { return configData.PaddleMoveUnitsPerSecond; }
     }
     /// <summary>
     /// Determines the Ball bounce speed.
     /// </summary>
-    public static float ballImpulseForce { get; } = 200f;
+    public static float ballImpulseForce
+    {
+        get { return configData.BallImpulseForce; }
+    }
 
+    public static ConfigurationData configData { get; set; }
     #endregion
 
     /// <summary>
@@ -29,6 +33,7 @@ public static class ConfigurationUtils
     /// </summary>
     public static void Initialize()
     {
+        configData = new ConfigurationData();
 
     }
 }

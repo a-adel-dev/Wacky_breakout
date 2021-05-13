@@ -18,6 +18,7 @@ public class Ball : MonoBehaviour
             ConfigurationUtils.ballImpulseForce * Mathf.Cos(angle),
             ConfigurationUtils.ballImpulseForce * Mathf.Sin(angle));
         GetComponent<Rigidbody2D>().AddForce(force);
+        Debug.Log(ConfigurationUtils.ballImpulseForce.ToString());
     }
 
     // Update is called once per frame

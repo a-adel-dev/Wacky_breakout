@@ -11,6 +11,7 @@ public class Paddle : MonoBehaviour
     const float BounceAngleHalfRange = 60 * Mathf.Deg2Rad;
     float halfWidth;
     Rigidbody2D rigidBody;
+    float halfColliderHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +24,7 @@ public class Paddle : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        
         MoveCorrected(halfWidth);
-       
     }
 
     void MoveCorrected(float possibleXPos)
@@ -53,7 +52,8 @@ public class Paddle : MonoBehaviour
     /// <param name="coll">collision info</param>
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.CompareTag("Ball"))
+        if (coll.gameObject.CompareTag("Ball")
+            && TopCollision(coll))
         {
             // calculate new ball direction
             float ballOffsetFromPaddleCenter = transform.position.x -
@@ -68,5 +68,17 @@ public class Paddle : MonoBehaviour
             Ball ballScript = coll.gameObject.GetComponent<Ball>();
             ballScript.SetDirection(direction);
         }
+    }
+    /// <summary>
+    /// Checks for a collision on the top of the paddle
+    /// </summary>
+    /// <returns><c>true</c>, if collision was on the top of the paddle, <c>false</c> otherwise.</returns>
+    /// <param name="coll">collision info</param>
+    bool TopCollision(Collision2D coll)
+    {
+        ContactPoint2D[] contacts = new ContactPoint2D[2];
+        // on top collisions, both contact points are at the same y location
+        coll.GetContacts(contacts);
+        return Mathf.Abs(contacts[0].point.y - contacts[1].point.y) < Mathf.Epsilon;
     }
 }
