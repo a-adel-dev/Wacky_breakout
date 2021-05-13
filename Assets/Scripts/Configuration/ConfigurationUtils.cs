@@ -25,6 +25,11 @@ public static class ConfigurationUtils
         get { return configData.BallImpulseForce; }
     }
 
+    public static float ballLifeTimeInSeconds 
+    { 
+        get { return configData.BallLifetimeInSeconds; }
+    }
+
     public static ConfigurationData configData { get; set; }
     #endregion
 

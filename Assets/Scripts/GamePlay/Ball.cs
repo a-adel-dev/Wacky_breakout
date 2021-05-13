@@ -9,22 +9,29 @@ using UnityEngine;
 /// </summary>
 public class Ball : MonoBehaviour
 {
-    
+    Timer timer;
     // Start is called before the first frame update
     void Start()
     {
+        timer = GetComponent<Timer>();
         float angle = -90 * Mathf.Deg2Rad;
         Vector2 force = new Vector2(
             ConfigurationUtils.ballImpulseForce * Mathf.Cos(angle),
             ConfigurationUtils.ballImpulseForce * Mathf.Sin(angle));
         GetComponent<Rigidbody2D>().AddForce(force);
         Debug.Log(ConfigurationUtils.ballImpulseForce.ToString());
+        timer.Duration = ConfigurationUtils.ballLifeTimeInSeconds;
+        timer.Run();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (timer.Finished)
+        {
+            Camera.main.GetComponent<BallSpawner>().SpawnNewBall(transform.position);
+            Destroy(gameObject);
+        }
     }
 
     internal void SetDirection(Vector2 direction)

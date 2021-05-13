@@ -14,8 +14,9 @@ public class ConfigurationData
     const string ConfigurationDataFileName = "ConfigurationData.csv";
 
     // configuration data
-    static float paddleMoveUnitsPerSecond = 10;
-    static float ballImpulseForce = 200;
+    static float paddleMoveUnitsPerSecond = 10f;
+    static float ballImpulseForce = 200f;
+    static float ballLifetimeInSeconds = 2f;
 
     #endregion
 
@@ -37,6 +38,11 @@ public class ConfigurationData
     public float BallImpulseForce
     {
         get { return ballImpulseForce; }    
+    }
+
+    public float BallLifetimeInSeconds
+    {
+        get { return ballLifetimeInSeconds; }
     }
 
     #endregion
@@ -82,6 +88,7 @@ public class ConfigurationData
         string[] inputValues = values.Split(',');
         paddleMoveUnitsPerSecond = float.Parse(inputValues[0]);
         ballImpulseForce = float.Parse(inputValues[1]);
+        ballLifetimeInSeconds = float.Parse(inputValues[2]);
     }
 
     #endregion
