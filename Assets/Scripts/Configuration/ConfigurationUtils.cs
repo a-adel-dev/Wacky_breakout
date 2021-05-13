@@ -17,9 +17,13 @@ public static class ConfigurationUtils
     {
         get { return 10; }
     }
+    /// <summary>
+    /// Determines the Ball bounce speed.
+    /// </summary>
+    public static float ballImpulseForce { get; } = 200f;
 
     #endregion
-    
+
     /// <summary>
     /// Initializes the configuration utils
     /// </summary>
